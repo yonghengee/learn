@@ -82,3 +82,79 @@ Redis 中每个 hash 可以存储 232 - 1 键值对（40多亿）。
 
 ## Redis 列表(List)
 Redis列表是简单的字符串列表，按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）  
+
+### LPUSH key value1 value2...
+将一个或多个值插入到列表头部
+
+### LRANGE key start stop
+获取列表指定范围内的元素
+
+### LINDEX key index
+通过索引获取列表中的元素
+
+### LPOP key
+移出并获取列表的第一个元素  
+
+###	LSET key index value
+通过索引设置列表元素的值  
+
+###	RPOP key
+移除列表的最后一个元素，返回值为移除的元素。  
+
+## Redis 集合(Set)
+Redis 的 Set 是 String 类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据。   
+Redis 中集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。  
+
+### SADD key member1 ...
+向集合添加一个或多个成员    
+
+### SCARD key
+获取集合的成员数
+
+### SDIFF key1 key2
+返回第一个集合与其他集合之间的差异
+
+### SDIFFSTORE destination key1 key2
+返回给定所有集合的差集并存储在 destination 中
+
+### SISMEMBER key member
+判断 member 元素是否是集合 key 的成员
+
+### SMEMBERS key
+返回集合中的所有成员
+
+### SPOP key
+移除并返回集合中的一个随机元素  
+
+### SUNION key1 key2
+返回所有给定集合的并集  
+
+## Redis 有序集合(sorted set)
+Redis 有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。
+
+不同的是每个元素都会关联一个 double 类型的分数。redis 正是通过分数来为集合中的成员进行从小到大的排序。
+
+有序集合的成员是唯一的,但分数(score)却可以重复。
+
+集合是通过哈希表实现的，所以添加，删除，查找的复杂度都是 O(1)。 集合中最大的成员数为 232 - 1 (4294967295, 每个集合可存储40多亿个成员)。  
+
+### ZADD key score1 member1 score2 member2...
+向有序集合添加一个或多个成员，或者更新已存在成员的分数  
+
+### ZCARD key
+获取有序集合的成员数
+
+### ZCOUNT key min max
+计算在有序集合中指定区间分数的成员数  
+
+### ZINCRBY key increment member
+有序集合中对指定成员的分数加上增量 increment  
+
+### ZRANGE key start stop WITHSCORES
+通过索引区间返回有序集合指定区间内的成员  
+
+### ZRANK key member
+返回有序集合中指定成员的索引
+
+### ZSCORE key member
+返回有序集中，成员的分数值
